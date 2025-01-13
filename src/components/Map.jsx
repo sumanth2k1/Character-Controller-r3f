@@ -1,4 +1,5 @@
 import { useAnimations, useGLTF } from "@react-three/drei";
+import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 
 export const Map = ({ model, ...props }) => {
@@ -21,8 +22,10 @@ export const Map = ({ model, ...props }) => {
   }, [actions]);
 
   return (
-    <group>
-      <primitive object={scene} {...props} ref={group} />
-    </group>
+    <RigidBody colliders="trimesh" type="fixed">
+      <group>
+        <primitive object={scene} {...props} ref={group} />
+      </group>
+    </RigidBody>
   );
 };
